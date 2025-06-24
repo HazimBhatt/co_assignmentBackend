@@ -1,6 +1,6 @@
 import express from "express";
 import { GoogleGenAI } from "@google/genai";
-// import cron from "node-cron";
+import cron from "node-cron";
 import axios from "axios";
 
 const router = express.Router();
