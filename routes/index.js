@@ -43,14 +43,14 @@ router.post("/getai", async (req, res) => {
 });
 
 // Cron job to ping backend every 5 minutes
-// cron.schedule("*/5 * * * *", async () => {
-//   try {
-//     const url = "https://portfolio-backend-5w4o.onrender.com/";
-//     await axios.get(url);
-//     console.log(`Pinged ${url} to keep the app alive`);
-//   } catch (err) {
-//     console.error("Cron self-ping failed:", err.message);
-//   }
-// });
+cron.schedule("*/5 * * * *", async () => {
+  try {
+    const url = "https://co-assignmentbackend.onrender.com/";
+    await axios.get(url);
+    console.log(`Pinged ${url} to keep the app alive`);
+  } catch (err) {
+    console.error("Cron self-ping failed:", err.message);
+  }
+});
 
 export default router;
