@@ -16,7 +16,9 @@ Your task is to return a JSON object with two keys using C++:
 
 Return only the JSON object — no explanation, no extra text, and no comments in the code.
 
-Here is the question:`;
+Here is the question:
+
+`;
 
 // POST /getai
 router.post("/getai", async (req, res) => {
