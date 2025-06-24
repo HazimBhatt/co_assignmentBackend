@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const MESSAGE = `You are an AI assistant. I will give you a coding problem.
 
-Your task is to return a JSON object with two keys using C++:
+Your task is to return a JSON object with two keys using C++ use classes if possible:
 
 "code": The solution code written in a clean and minimal format, using only what is explicitly mentioned in the problem. Do not use STL features like vector, map, or others unless they are specifically requested. Stick strictly to the requirements and constraints of the problem.
 
