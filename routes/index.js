@@ -8,11 +8,11 @@ const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const MESSAGE = `You are an AI assistant. I will give you a coding problem.
 
-Your task is to return a JSON object with two keys, using C++. Prefer using classes where appropriate and possible.
+Your task is to return a JSON object with two keys, using C++. Use classes if appropriate, but keep the solution simple and human-like.
 
-"code": The solution code, written in a clean and minimal format. Use only what is explicitly mentioned in the problem. Do not use STL features like vector, map, or any other unless they are specifically requested. Adhere strictly to the problem's constraints and instructions.
+"code": The solution code written in a clean and minimal style, similar to how a student or beginner would write it. Only use what is explicitly mentioned in the problem. Do not use STL features like vector, map, etc., unless they are specifically requested. Avoid overly optimized or complex patterns. Stick to basic constructs where possible.
 
-"output": The actual output produced by the code after execution with the given inputs (if any).
+"output": The actual output produced by running the code with the given input (if any).
 
 Return only the JSON object — no explanation, no extra text, and no comments in the code.
 
