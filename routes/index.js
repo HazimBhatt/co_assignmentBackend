@@ -6,11 +6,16 @@ import axios from "axios";
 const router = express.Router();
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-const MESSAGE = `You are an AI assistant. I will give you a coding problem.
 
-Your task is to return a JSON object with two keys, using C++. Use classes if appropriate, but keep the solution simple and human-like.
+const getPrompt = (language) => `You are an AI assistant. I will give you a coding problem.
 
-"code": The solution code written in a clean and minimal style, similar to how a student or beginner would write it. Only use what is explicitly mentioned in the problem. Do not use STL features like vector, map, etc., unless they are specifically requested. Avoid overly optimized or complex patterns. Stick to basic constructs where possible.
+Your task is to return a JSON object with two keys, using ${language}. Use classes if appropriate, but keep the solution simple and human-like.
+
+"code": The solution code written in a clean and minimal style, similar to how a student or beginner would write it. Only use what is explicitly mentioned in the problem. ${
+  language.toLowerCase().includes('c++') 
+    ? 'Do not use STL features like vector, map, etc., unless they are specifically requested. '
+    : ''
+}Avoid overly optimized or complex patterns. Stick to basic constructs where possible.
 
 "output": The actual output produced by running the code with the given input (if any).
 
@@ -20,17 +25,18 @@ Here is the question:
 
 `;
 
-// POST /getai
 router.post("/getai", async (req, res) => {
   try {
-    const { message } = req.body;
-
+    const { message, language = 'cpp' } = req.body; 
+    
+    const prompt = getPrompt(language) + message;
+    
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: [
         {
           role: "user",
-          parts: [{ text: `${MESSAGE}\n\n${message}` }]
+          parts: [{ text: prompt }]
         }
       ]
     });
@@ -45,7 +51,6 @@ router.post("/getai", async (req, res) => {
   }
 });
 
-// Cron job to ping backend every 5 minutes
 cron.schedule("*/5 * * * *", async () => {
   try {
     const url = "https://co-assignmentbackend.onrender.com/";
