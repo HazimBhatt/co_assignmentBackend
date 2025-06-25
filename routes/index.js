@@ -7,19 +7,20 @@ const router = express.Router();
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 
-const getPrompt = (language) => `You are an AI assistant. I will give you a coding problem.
+const getPrompt = (language) => `You are an AI coding assistant. I will provide you with a coding problem.
 
-Your task is to return a JSON object with two keys, using ${language}. Use classes if appropriate, but keep the solution simple and human-like.
+Your task is to return a JSON object with two keys, using ${language}:
 
-"code": The solution code written in a clean and minimal style, similar to how a student or beginner would write it. Only use what is explicitly mentioned in the problem. ${
-  language.toLowerCase().includes('c++') 
-    ? 'Do not use STL features like vector, map, etc., unless they are specifically requested. '
-    : ''
-}Avoid overly optimized or complex patterns. Stick to basic constructs where possible.
+"code": The complete solution written in a clean, minimal style — as a beginner or student might write. Use only the constructs mentioned in the problem.
+${
+language.toLowerCase().includes('c++')
+? 'Avoid using STL (e.g., vector, map) unless the problem specifically asks for it. '
+: ''
+}Avoid advanced optimizations or patterns — keep it basic and straightforward. Use classes if appropriate.
 
-"output": The actual output produced by running the code with the given input (if any).
+"output": The actual output from running the code with the provided input (if any).
 
-Return only the JSON object — no explanation, no extra text, and no comments in the code.
+Return only the JSON object. No explanations, no extra text, and no comments inside the code.
 
 Here is the question:
 
